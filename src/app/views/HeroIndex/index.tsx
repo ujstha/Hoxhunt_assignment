@@ -160,11 +160,13 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
         heroes={heroes}
         setCurrentID={() => setCurrentID("")}
         setNextID={() => {
-          const nextID = Number(currentID) + 1;
+          const nextID =
+            Number(currentID) < heroes.length ? Number(currentID) + 1 : 1;
           setCurrentID(nextID.toString());
         }}
         setPrevID={() => {
-          const prevID = Number(currentID) - 1;
+          const prevID =
+            Number(currentID) > 1 ? Number(currentID) - 1 : heroes.length;
           setCurrentID(prevID.toString());
         }}
       />

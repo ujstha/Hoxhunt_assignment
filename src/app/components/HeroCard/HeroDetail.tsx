@@ -39,9 +39,8 @@ const FullDetailContainer = styled.div`
   span.btns {
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 0;
     cursor: pointer;
-    font-size: 3em;
     transition: color ease-in 0.15s;
     span.nextBtn:hover,
     span.prevBtn:hover,
@@ -51,6 +50,14 @@ const FullDetailContainer = styled.div`
     }
     > span {
       margin-right: 15px;
+      font-size: 2em;
+    }
+    span.prevBtn,
+    span.nextBtn {
+      padding: 5px 10px;
+      text-align: center;
+      font-size: 1.2em;
+      background-color: rgba(233, 30, 99, 0.4);
     }
   }
 `;
@@ -171,7 +178,9 @@ export const HeroDetail: React.FC<HeroDetailProps> = ({
     <FullDetailContainer className={currentID !== "" ? "active" : ""}>
       {currentID !== ""
         ? document.getElementsByTagName("body")[0].classList.add("heroTabOpen")
-        : document.getElementsByTagName("body")[0].classList.remove("heroTabOpen")}
+        : document
+            .getElementsByTagName("body")[0]
+            .classList.remove("heroTabOpen")}
       {currentID !== "" &&
         heroes
           .filter(filtered => filtered["id"] === currentID.toString())
@@ -289,16 +298,12 @@ export const HeroDetail: React.FC<HeroDetailProps> = ({
                 </FullDetailBody>
               </FullDetail>
               <span className="btns">
-                {Number(currentID) > 1 && (
-                  <span onClick={setPrevID} className="prevBtn">
-                    &lt;
-                  </span>
-                )}
-                {Number(currentID) < heroes.length && (
-                  <span onClick={setNextID} className="nextBtn">
-                    &gt;
-                  </span>
-                )}
+                <span onClick={setPrevID} className="prevBtn">
+                  &lt;
+                </span>
+                <span onClick={setNextID} className="nextBtn">
+                  &gt;
+                </span>
                 <span onClick={setCurrentID} className="closeBtn">
                   &times;
                 </span>
