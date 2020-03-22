@@ -4,6 +4,8 @@ import styled from "styled-components";
 interface HeroDetailProps {
   currentID: string;
   setCurrentID: any;
+  setNextID: any;
+  setPrevID: any;
   heroes: any;
 }
 
@@ -34,16 +36,21 @@ const FullDetailContainer = styled.div`
     transition: all ease-in-out 0.5s;
   }
 
-  span.closeBtn {
+  span.btns {
     position: absolute;
     top: 0;
     right: 10px;
     cursor: pointer;
     font-size: 3em;
     transition: color ease-in 0.15s;
-    :hover {
+    span.nextBtn:hover,
+    span.prevBtn:hover,
+    span.closeBtn:hover {
       color: #e91e63;
       transition: color ease-in 0.15s;
+    }
+    > span {
+      margin-right: 15px;
     }
   }
 `;
@@ -73,6 +80,7 @@ const FullDetailImage = styled.div`
 
   @media (max-width: 1365px) {
     flex: 0 0 100%;
+    margin-top: 35px;
     height: 400px;
   }
   @media (max-width: 1023px) {
@@ -153,12 +161,17 @@ const FullDetailHead = styled.div`
 export const HeroDetail: React.FC<HeroDetailProps> = ({
   currentID,
   heroes,
-  setCurrentID
+  setCurrentID,
+  setNextID,
+  setPrevID
 }) => {
   const [heroTabs, setHeroTabs] = React.useState("skills");
 
   return (
     <FullDetailContainer className={currentID !== "" ? "active" : ""}>
+      {currentID !== ""
+        ? document.getElementsByTagName("body")[0].classList.add("heroTabOpen")
+        : document.getElementsByTagName("body")[0].classList.remove("heroTabOpen")}
       {currentID !== "" &&
         heroes
           .filter(filtered => filtered["id"] === currentID.toString())
@@ -275,8 +288,20 @@ export const HeroDetail: React.FC<HeroDetailProps> = ({
                   </div>
                 </FullDetailBody>
               </FullDetail>
-              <span onClick={setCurrentID} className="closeBtn">
-                &times;
+              <span className="btns">
+                {Number(currentID) > 1 && (
+                  <span onClick={setPrevID} className="prevBtn">
+                    &lt;
+                  </span>
+                )}
+                {Number(currentID) < heroes.length && (
+                  <span onClick={setNextID} className="nextBtn">
+                    &gt;
+                  </span>
+                )}
+                <span onClick={setCurrentID} className="closeBtn">
+                  &times;
+                </span>
               </span>
             </div>
           ))}

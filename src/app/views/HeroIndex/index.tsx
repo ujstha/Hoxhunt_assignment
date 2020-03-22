@@ -159,6 +159,14 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
         currentID={currentID}
         heroes={heroes}
         setCurrentID={() => setCurrentID("")}
+        setNextID={() => {
+          const nextID = Number(currentID) + 1;
+          setCurrentID(nextID.toString());
+        }}
+        setPrevID={() => {
+          const prevID = Number(currentID) - 1;
+          setCurrentID(prevID.toString());
+        }}
       />
       <Section
         heading={"The Hero Rises"}
