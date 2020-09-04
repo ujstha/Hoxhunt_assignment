@@ -24,7 +24,7 @@
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "react-apollo-hooks": "^0.4.3",
-    "type-graphql": "^0.17.0",
+    "type-graphql": "^0.17.6",
     "typedi": "^0.8.0",
     "typeorm": "0.2.15",
     "typeorm-typedi-extensions": "^0.2.3"
